@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    h2 Make a Survey
+    form(method='post', action='/add-question', role="form")
+        input.form-control(type='text', name='question', placeholder='Enter a question', required)    
+        button.btn.btn-primary(type='submit') Create a Question
+    h2 Manage Questions
+    each q in questions
+        h4 Add a Choice
+        a(href='/questions/' + q.id) #{q.question}
+        a.btn.btn-success.btn-block(href='/questions/'+q.id)
+            i.glyphicon.glyphicon-pencil
+            span  Edit
+        a.btn.btn-success.btn-block(href='/questions/'+q.id+'/results')
+            i.glyphicon.glyphicon-stats
+            span  Results
+        //
+            form(method='post', action= q.id+'/add-choice')
+            input.form-control(type='text', name='question', placeholder='Enter a choice', required)
+            button.btn.btn-success(type='submit') Create a Choice
+

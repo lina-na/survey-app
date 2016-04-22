@@ -1,0 +1,12 @@
+extends layout
+
+block content
+	h2 Edit Question #{question.id}
+	h4 #{question.question}
+	ul
+		each choice in question.Choices
+			li #{choice.choice}
+	h4 Add a Choice
+	form(method='post', action= question.id+'/choices/add')
+		input.form-control(type='text', name='choice', placeholder='Enter a choice', required)
+		button.btn.btn-primary(type='submit') Save

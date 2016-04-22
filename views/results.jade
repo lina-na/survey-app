@@ -1,0 +1,7 @@
+extends layout
+
+block content
+	h2 Results for #{question.question}
+	each choice in choices
+		p #{choice.choice}
+		p #{choice.totalVotes}
