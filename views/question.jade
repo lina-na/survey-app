@@ -16,6 +16,9 @@ block content
 	.col-md-4
 		h2.lead #{question.question}
 		table.table.table-striped
+			tr 
+				td 
+					b Choice
 			each choice in question.Choices
 				tr 
 					td #{choice.choice}

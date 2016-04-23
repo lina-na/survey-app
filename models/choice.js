@@ -1,13 +1,14 @@
-"use strict";
-module.exports = function(sequelize, DataTypes){
-	var Choice = sequelize.define("Choice", {
+'use strict';
+
+module.exports = function(sequelize, DataTypes) {
+	var Choice = sequelize.define('Choice', {
 		choice: DataTypes.STRING
 		//QuestionId: DataTypes.INTEGER
 	}, {
 		classMethods: {
-			associate: function(models){
+			associate: function(models) {
 				Choice.belongsTo(models.Question, {
-					onDelete: "CASCADE",
+					onDelete: 'CASCADE',
 					foreignKey: {
 						allowNull: false
 					}

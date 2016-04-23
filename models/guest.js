@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-module.exports = function(sequelize, DataTypes){
+module.exports = function(sequelize, DataTypes) { 
 	var Guest = sequelize.define('Guest', {
 		uuid: DataTypes.STRING,
 		ipAddress: DataTypes.STRING,

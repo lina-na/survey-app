@@ -1,13 +1,12 @@
-"use strict";
+'use strict';
 
-module.exports = function(sequelize, DataTypes){
+module.exports = function(sequelize, DataTypes) {
 	var QuestionGuest = sequelize.define('QuestionGuest', {
 		GuestId: DataTypes.STRING,
 		QuestionId: DataTypes.INTEGER
-		// ChoiceId: DataTypes.INTEGER
 	},{
 		classMethods: {
-			associate: function(models){
+			associate: function(models) {
 				QuestionGuest.belongsTo(models.Choice, {
 					constraints: false,
 					foreignKey: 'ChoiceId'
@@ -15,5 +14,6 @@ module.exports = function(sequelize, DataTypes){
 			}
 		}
 	});
+
 	return QuestionGuest;
-}
+};

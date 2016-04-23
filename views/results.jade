@@ -1,7 +1,16 @@
 extends layout
 
 block content
-	h2 Results for #{question.question}
-	each choice in choices
-		p #{choice.choice}
-		p #{choice.totalVotes}
+	legend Viewing Results for #{question.question}
+	.col-md-4
+		table.table.table-striped
+			tr 
+				td 
+					b Choice
+				td 
+					b Votes
+
+			each choice in choices
+				tr
+					td  #{choice.choice}
+					td  #{choice.totalVotes}
