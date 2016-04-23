@@ -12,15 +12,14 @@ var db        = {};
   var sequelize = new Sequelize(process.env[config.use_env_variable]);*/
 
 if (process.env.DATABASE_URL) {
-  // the application is executed on Heroku ... use the postgres database
+  // the application is executed on Heroku ... use db mysql
   sequelize = new Sequelize(process.env.DATABASE_URL, {
-    dialect:  'postgres',
-    protocol: 'postgres',
-    port:     '5432',
-    host:     'ec2-50-16-200-223.compute-1.amazonaws.com',
-    user:     'kknwrlcicwwtky',
-    password: 'p52bI8XN7aEsyiPDGIkMWqJ4IY', 
-    logging:  true //false
+    dialect:  'mysql',
+    protocol: 'mysql',
+    host:     'us-cdbr-iron-east-03.cleardb.net',
+    user:     'bb0436f0a841f4',
+    password: '47f61ae2', 
+    database: 'heroku_a3e925ef5d0b0ec'
   })
 } else {
   var sequelize = new Sequelize(config.database, config.username, config.password, config);
