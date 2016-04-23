@@ -178,7 +178,46 @@ router.post('/questions/:id/choices/add', checkAuth, function(req, res, next) {
 	})
 
 	.then(function() {
-		res.redirect('/questions');
+		res.redirect('/questions/' + req.params.id);
+	});
+});
+
+//Update question text in edit question
+router.post('/questions/:id', function(req, res, next) {
+	models.Question.findById(req.params.id)
+		.then(function(question) {
+			question.set({
+				question: req.body.question
+			})
+			.save()
+			.then(function(question) {
+				res.redirect('/questions/' + question.id);
+			});
+		});
+});
+//Update response text in edit question
+router.post('/questions/:id/choices/:choiceId', checkAuth, function(req, res, next) {
+	models.Choice.findById(req.params.choiceId)
+		.then(function(choice) {
+			choice.set({
+				choice: req.body.choice
+			})
+			.save()
+			.then(function(choice) {
+				res.redirect('/questions/' + req.params.id);
+			});
+		});
+});
+
+//Delete a response in edit question
+router.get('/questions/:id/choices/:choiceId/delete', checkAuth, function(req, res, next) {
+	models.Choice.destroy({
+		where: {
+			id: req.params.choiceId
+		}
+	})
+	.then(function() {
+		res.redirect('/questions/' + req.params.id);
 	});
 });
 

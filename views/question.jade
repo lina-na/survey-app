@@ -13,15 +13,27 @@ block content
 					span  Sign out
 
 	legend Edit Question #{question.id}
-	.col-md-4
-		h2.lead #{question.question}
-		table.table.table-striped
-			tr 
-				td 
-					b Choice
-			each choice in question.Choices
-				tr 
-					td #{choice.choice}
+	.row
+		.col-md-6
+			form(method='post', action='/questions/'+ question.id)
+				.form-group
+					textarea.input-lg(name='question', id='question', class='form-control', rows='2', required)=question.question
+				button.btn.btn-primary.btn-block Save
+				a.btn.btn-link.btn-block(href='/questions') Cancel	
+		.col-md-6
+			ul.list-group 
+				each choice in question.Choices 
+					li.list-group-item
+						form(method='post', action='/questions/' + question.id + '/choices/' + choice.id)
+							.row
+								.col-xs-6
+									input.form-control(type='text', name='choice', id='choice_'+choice.id, value=choice.choice, required)
+								.col-xs-3
+									button.btn.btn-success.btn-block(type='submit', alt='Save') 
+										i.glyphicon.glyphicon-check
+								.col-xs-3
+									a.btn.btn-danger.btn-block(href='/questions/' + question.id + '/choices/' + choice.id + '/delete')
+										i.glyphicon.glyphicon-trash
 
 	legend Add a Choice
 	.col-md-4
@@ -29,4 +41,5 @@ block content
 			.input-group
 				input.form-control(type='text', name='choice', placeholder='Enter a choice', required)
 				span.input-group-btn
-					button.btn.btn-primary(type='submit') Save
+					button.btn.btn-success(type='submit')
+						i.glyphicon.glyphicon-check
