@@ -16,8 +16,10 @@ if (process.env.DATABASE_URL) {
   sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect:  'postgres',
     protocol: 'postgres',
-    port:     match[4],
-    host:     match[3],
+    port:     '5432',
+    host:     'ec2-50-16-200-223.compute-1.amazonaws.com',
+    user:     'kknwrlcicwwtky',
+    password: 'p52bI8XN7aEsyiPDGIkMWqJ4IY', 
     logging:  true //false
   })
 } else {
