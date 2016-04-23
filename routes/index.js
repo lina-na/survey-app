@@ -63,7 +63,7 @@ router.get('/', function(req, res) {
 		.then(function(questions) {
 			if (questions.length <= 0) {
 				//Answered all the questions, redirect to a page with no more questions
-				res.send('You have answered all of the available questions. Please try again later.');
+				res.render('empty');
 			}else{
 				models.Question.findById(questions.pop().id)
 				.then(function(question) {

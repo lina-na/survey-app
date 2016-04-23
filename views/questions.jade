@@ -7,7 +7,7 @@ block content
         .container-fluid
             .navbar-header
                 a(class='navbar-brand', href='/')
-                    img(alt='Home', src='/images/logo.png' width='50' height='50')
+                    img(alt='Home', src='/images/logo.png' class='img-rounded' width='50' height='50')
             .nav.navbar-nav.navbar-right
                 a.button.btn.btn-default(class='navbar-btn', href='/logout') 
                     i.glyphicon.glyphicon-log-out  
@@ -36,8 +36,3 @@ block content
             a.btn.btn-success.singlebutton(href='/questions/'+q.id+'/results')
                 i.glyphicon.glyphicon-stats
                 span  Results
-            //
-                form(method='post', action= q.id+'/add-choice')
-                input.form-control(type='text', name='question', placeholder='Enter a choice', required)
-                button.btn.btn-success(type='submit') Create a Choice
-
