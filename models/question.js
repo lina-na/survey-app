@@ -5,11 +5,18 @@ module.exports = function(sequelize, DataTypes) {
 		question: DataTypes.STRING
 	}, {
 		classMethods: {
-			associate: function(models) {
-				Question.hasMany(models.Choice)
-			}
+	      	associate: function(models) {
+	        	Question.belongsToMany(models.Guest, {
+	          		through: {
+	           	 		model: models.QuestionGuest,
+	            		unique: false
+	          		},
+	          		constraints: false
+	        	});
+
+				Question.hasMany(models.Choice);
+			}	
 		}
 	});
-	
 	return Question;
 };
