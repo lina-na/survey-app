@@ -2,6 +2,18 @@
 extends layout
 
 block content	
+
+	<!--Navbar Content-->
+	.navbar.navbar-default
+		.container-fluid
+			.navbar-header
+				a(class='navbar-brand', href='/')
+					img(alt='Home', src='/images/logo.png' width='50' height='50')
+			.nav.navbar-nav.navbar-right
+				a.button.btn.btn-default(class='navbar-btn', href='/login') 
+					i.glyphicon.glyphicon-log-in  
+					span  Admin
+
 	p.text-center.lead #{question.question}
 	form(method='post', action='/')
 		each choice in choices

@@ -1,22 +1,43 @@
 extends layout
 
 block content
-    h2 Make a Survey
-    form(method='post', action='/add-question', role="form")
-        input.form-control(type='text', name='question', placeholder='Enter a question', required)    
-        button.btn.btn-primary(type='submit') Create a Question
-    h2 Manage Questions
+
+    <!--Navbar Content-->
+    .navbar.navbar-default
+        .container-fluid
+            .navbar-header
+                a(class='navbar-brand', href='/')
+                    img(alt='Home', src='/images/logo.png' width='50' height='50')
+            .nav.navbar-nav.navbar-right
+                a.button.btn.btn-default(class='navbar-btn', href='/logout') 
+                    i.glyphicon.glyphicon-log-out  
+                    span  Sign out
+    legend Make a Survey
+
+    .form-group
+        form(method='post', action='/add-question', role="form")
+            .col-md-8
+                .input-group
+                    input.form-control(type='text', name='question', placeholder='Enter a question', required) 
+                    span.input-group-btn   
+                        button.btn.btn-primary(type='submit') Create a Question
+                p
+                    br
+    legend Manage Questions
     each q in questions
-        h4 Add a Choice
-        a(href='/questions/' + q.id) #{q.question}
-        a.btn.btn-success.btn-block(href='/questions/'+q.id)
-            i.glyphicon.glyphicon-pencil
-            span  Edit
-        a.btn.btn-success.btn-block(href='/questions/'+q.id+'/results')
-            i.glyphicon.glyphicon-stats
-            span  Results
-        //
-            form(method='post', action= q.id+'/add-choice')
-            input.form-control(type='text', name='question', placeholder='Enter a choice', required)
-            button.btn.btn-success(type='submit') Create a Choice
+        .col-md-4
+            a(href='/questions/' + q.id) #{q.question}
+        .btn-toolbar
+            .col-md-8
+            a.btn.btn-primary.singlebutton(href='/questions/'+q.id)
+                i.glyphicon.glyphicon-pencil
+                span  Edit
+
+            a.btn.btn-success.singlebutton(href='/questions/'+q.id+'/results')
+                i.glyphicon.glyphicon-stats
+                span  Results
+            //
+                form(method='post', action= q.id+'/add-choice')
+                input.form-control(type='text', name='question', placeholder='Enter a choice', required)
+                button.btn.btn-success(type='submit') Create a Choice
 

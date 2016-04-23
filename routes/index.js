@@ -87,12 +87,11 @@ router.post('/', function(req, res){
 	console.log(req.body)
 	console.log(req.body.choice_id)
 	//choice_id is found here.....
-	models.QuestionGuest.build({
+	models.QuestionGuest.create({
 		QuestionId: req.body.question_id,
 		GuestId: req.body.guest_id,
 		ChoiceId: req.body.choice_id
 	})
-	.save()
 	.then(function(result){
 		res.redirect('/');
 	});
@@ -121,10 +120,10 @@ router.post('/add-question', checkAuth, function(req, res, next){
 	models.Question.create({
 		question: req.body["question"]
 	}).then(function() {
-		res.redirect('/');
+		res.redirect('questions');
 	});
 });
-
+//Get the specific question page
 router.get('/questions/:id', checkAuth, function(req, res, next){
 	models.Question.findById(req.params.id, {
 		include: [{
@@ -157,7 +156,7 @@ router.post('/questions/:id/choices/add', checkAuth, function(req, res, next){
 		choice: req.body["choice"],
 		QuestionId: req.params.id
 	}).then(function() {
-		res.redirect('/');
+		res.redirect('/questions');
 	});
 });
 

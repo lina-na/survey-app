@@ -1,12 +1,29 @@
 extends layout
 
 block content
-	h2 Edit Question #{question.id}
-	h4 #{question.question}
-	ul
-		each choice in question.Choices
-			li #{choice.choice}
-	h4 Add a Choice
-	form(method='post', action= question.id+'/choices/add')
-		input.form-control(type='text', name='choice', placeholder='Enter a choice', required)
-		button.btn.btn-primary(type='submit') Save
+	<!--Navbar Content-->
+	.navbar.navbar-default
+		.container-fluid
+			.navbar-header
+				a(class='navbar-brand', href='/')
+					img(alt='Home', src='/images/logo.png' width='50' height='50')
+			.nav.navbar-nav.navbar-right		
+				a.button.btn.btn-default(class='navbar-btn', href='/logout') 
+					i.glyphicon.glyphicon-log-out  
+					span  Sign out
+
+	legend Edit Question #{question.id}
+	.col-md-4
+		h2.lead #{question.question}
+		table.table.table-striped
+			each choice in question.Choices
+				tr 
+					td #{choice.choice}
+
+	legend Add a Choice
+	.col-md-4
+		form(method='post', action= question.id+'/choices/add')
+			.input-group
+				input.form-control(type='text', name='choice', placeholder='Enter a choice', required)
+				span.input-group-btn
+					button.btn.btn-primary(type='submit') Save
