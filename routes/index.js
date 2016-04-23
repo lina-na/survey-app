@@ -49,7 +49,6 @@ router.get('/', function(req, res) {
 		if (created) {
 			guest.set( {
 				ipAddress: req.ip,
-				//userAgent: req.headers['user-agent']
 			})
 
 			.save();
@@ -99,18 +98,26 @@ router.post('/', function(req, res) {
 router.get('/questions/:id/results', checkAuth, function(req, res, next) {
 	models.Question.findById(req.params.id)
 	.then(function(question) {
+		if ( ! question){
+  			res.status(500).send('Cannot find question');
+		}
+
 		models.sequelize.query('select c.choice, count(g.id) as totalVotes from Choices c left join QuestionGuests g on c.id = g.ChoiceId where c.QuestionId = ? group by c.id order by totalVotes desc', {
 			replacements: [question.id],
 			type: models.sequelize.QueryTypes.SELECT
 		})
 
 		.then(function(choices) {
-			console.log(choices)
 			res.render('results', {
 				question:question,
 				choices: choices
 			});
 		});
+	})
+
+	.catch(function(error) {
+		console.error(err);
+  		res.status(500).send('There was an error');
 	});
 });
 
@@ -122,6 +129,10 @@ router.post('/add-question', checkAuth, function(req, res, next) {
 
 	.then(function() {
 		res.redirect('questions');
+	})
+	.catch(function(error) {
+		console.error(error);
+		res.status(500).send('There was an error');
 	});
 });
 //Get the specific question page
@@ -133,6 +144,10 @@ router.get('/questions/:id', checkAuth, function(req, res, next) {
 	})
 
 	.then(function(question) {
+		if ( ! question) {
+  			res.status(500).send('Cannot find question');
+		}
+		
 		res.render('question', {
 			question: question
 		});

@@ -19,8 +19,7 @@ module.exports = {
       updatedAt: Sequelize.DATE,
       QuestionId: Sequelize.INTEGER,
       uuid: Sequelize.STRING,
-      ipAddress: Sequelize.STRING,
-      userAgent: Sequelize.STRING
+      ipAddress: Sequelize.STRING
     });
   },
 

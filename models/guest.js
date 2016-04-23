@@ -3,8 +3,7 @@
 module.exports = function(sequelize, DataTypes) { 
 	var Guest = sequelize.define('Guest', {
 		uuid: DataTypes.STRING,
-		ipAddress: DataTypes.STRING,
-		userAgent: DataTypes.STRING
+		ipAddress: DataTypes.STRING
 	}, {
 		classMethods: {
 			associate: function(models) {
@@ -16,5 +15,6 @@ module.exports = function(sequelize, DataTypes) {
 			}
 		}	
 	});
+
 	return Guest;
 };
