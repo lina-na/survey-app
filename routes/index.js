@@ -103,7 +103,7 @@ router.get('/questions/:id/results', checkAuth, function(req, res, next) {
   			res.status(500).send('Cannot find question');
 		}
 
-		models.sequelize.query('select c.choice, count(g.id) as totalVotes from Choices c left join QuestionGuests g on c.id = g.ChoiceId where c.QuestionId = ? group by c.id order by totalVotes desc', {
+		models.sequelize.query('select c.choice, count(guest.id) as totalVotes from Choices c left join QuestionGuests guest on c.id = guest.ChoiceId where c.QuestionId = ? group by c.id order by totalVotes desc', {
 			replacements: [question.id],
 			type: models.sequelize.QueryTypes.SELECT
 		})
