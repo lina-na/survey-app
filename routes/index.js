@@ -13,6 +13,7 @@ function checkAuth(req, res, next) {
 		next();
 	}
 }
+
 //Login authentication 
 router.post('/login', function(req, res) {
 	var post = req.body;
@@ -135,6 +136,7 @@ router.post('/add-question', checkAuth, function(req, res, next) {
 		res.status(500).send('There was an error');
 	});
 });
+
 //Get the specific question page
 router.get('/questions/:id', checkAuth, function(req, res, next) {
 	models.Question.findById(req.params.id, {
@@ -179,5 +181,7 @@ router.post('/questions/:id/choices/add', checkAuth, function(req, res, next) {
 		res.redirect('/questions');
 	});
 });
+
+
 
 module.exports = router;
