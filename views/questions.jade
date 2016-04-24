@@ -3,36 +3,40 @@ extends layout
 block content
 
     <!--Navbar Content-->
-    .navbar.navbar-default
+    navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
         .container-fluid
             .navbar-header
-                a(class='navbar-brand', href='/')
+                button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+                    span.sr-only Toggle navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                a.navbar-brand(id='logo', href='./')
                     img(alt='Home', src='/images/logo.png' class='img-rounded' width='50' height='50')
-            .nav.navbar-nav.navbar-right
-                a.button.btn.btn-default(class='navbar-btn', href='/logout') 
-                    i.glyphicon.glyphicon-log-out  
-                    span  Sign out
-    legend Make a Survey
+            nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+                ul.nav.navbar-nav.navbar-right 
+                    li
+                        a(href='/logout') 
+                            i.glyphicon.glyphicon-log-out
+                            span  Log out
+    div.content
+        div(class="centered")
+            a.button.btn.btn-primary.btn-lg(href='a' type='submit') Create a Question
 
-    .form-group
-        form(method='post', action='/add-question', role="form")
-            .col-md-8
-                .input-group
-                    input.form-control(type='text', name='question', placeholder='Enter a question', required) 
-                    span.input-group-btn   
-                        button.btn.btn-primary(type='submit') Create a Question
-                p
-                    br
-    legend Manage Questions
-    each q in questions
-        .col-md-4
-            a(href='/questions/' + q.id) #{q.question}
-        .btn-toolbar
-            .col-md-8
-            a.btn.btn-primary.singlebutton(href='/questions/'+q.id)
-                i.glyphicon.glyphicon-pencil
-                span  Edit
-
-            a.btn.btn-success.singlebutton(href='/questions/'+q.id+'/results')
-                i.glyphicon.glyphicon-stats
-                span  Results
+            h2.lead or Manage Questions
+        .row
+            table.table
+                each q in questions
+                    tr
+                        td
+                            a(class='question' href='/questions/' + q.id)=q.question
+                        td.col-md-2
+                            .btn-toolbar
+                                a.btn.btn-primary.singlebutton(href='/questions/'+q.id)
+                                    i.glyphicon.glyphicon-pencil
+                                    span  Edit
+                                a.btn.btn-success.singlebutton(href='/questions/'+q.id+'/results')
+                                    i.glyphicon.glyphicon-stats
+                                    span  Results
+                                a.btn.btn-danger.singlebutton(href='/questions/'+q.id+'/delete')
+                                    i.glyphicon.glyphicon-trash
