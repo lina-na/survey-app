@@ -4,6 +4,7 @@ var uuid = require('uuid');
 var models = require('../models');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var flash = require('connect-flash');
 
 //Use this function to check if the user is logged in as an admin
 function checkAuth(req, res, next) {
@@ -191,6 +192,7 @@ router.post('/questions/:id', function(req, res, next) {
 			})
 			.save()
 			.then(function(question) {
+				req.flash('success', 'updated');
 				res.redirect('/questions/' + question.id);
 			});
 		});
@@ -217,6 +219,7 @@ router.post('/questions/:id/choices/:choiceId', checkAuth, function(req, res, ne
 			})
 			.save()
 			.then(function(choice) {
+				req.flash('success', 'updated');
 				res.redirect('/questions/' + req.params.id);
 			});
 		});
