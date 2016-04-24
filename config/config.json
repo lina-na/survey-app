@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "kyuana1",
+    "password": null,
     "database": "surveys_database",
     "host": "127.0.0.1",
     "dialect": "mysql"
