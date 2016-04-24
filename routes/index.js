@@ -128,8 +128,8 @@ router.post('/add-question', checkAuth, function(req, res, next) {
 		question: req.body.question
 	})
 
-	.then(function() {
-		res.redirect('questions');
+	.then(function(question) {
+		res.redirect('/questions/'+question.id);
 	})
 	.catch(function(error) {
 		console.error(error);
