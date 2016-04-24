@@ -2,9 +2,8 @@ extends layout
 
 block content
 	div.content
-		body
-			legend Viewing Results for #{question.question}
-			.col-md-4
+		legend Viewing Results for "#{question.question}"
+			div.centered
 				table.table.table-striped
 					tr 
 						td 
@@ -16,6 +15,6 @@ block content
 						tr
 							td  #{choice.choice}
 							td  #{choice.totalVotes}
-				p
-					br
-					a.button.btn.btn-primary(href='/questions', type='button',  role='button') Back to Questions
+		p
+			br
+			a.button.btn.btn-primary(href='/questions', type='button',  role='button') Back to Questions

@@ -4,27 +4,34 @@ extends layout
 block content	
 
 	<!--Navbar Content-->
-	.navbar.navbar-default
+	navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
 		.container-fluid
 			.navbar-header
-				a(id='logo', class='navbar-brand', href='/')
+				button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
+					span.sr-only Toggle navigation
+					span.icon-bar
+					span.icon-bar
+					span.icon-bar
+				a.navbar-brand(id='logo', href='./')
 					img(alt='Home', src='/images/logo.png' class='img-rounded' width='50' height='50')
-			.nav.navbar-nav.navbar-right
-				a.button.btn.btn-default(class='navbar-btn', href='/login') 
-					i.glyphicon.glyphicon-log-in  
-					span  Admin
-
-	p.text-center.lead #{question.question}
-	form(method='post', action='/')
-		each choice in choices
-			.col-md-4
-			.radio
-				label
-					input(type='radio', name='choice_id', id='choice_id_'+ choice.id, value=choice.id)
-					p=choice.choice
-		p
-			.col-md-4.text-center
-			button.btn.btn-primary.btn-lg(type='submit', role='button') Submit
-		input(type='hidden', name='question_id', id='question_id', value=question.id)
-		input(type='hidden', name='guest_id', id='guest_id', value=guest.id)
+			nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
+				ul.nav.navbar-nav.navbar-right 
+					li
+						a(href='/login') 
+							i.glyphicon.glyphicon-log-in
+							span  Admin
+	div.content
+		p.text-center.lead #{question.question}
+		form(method='post', action='/')
+			each choice in choices
+				.col-md-4
+				.radio
+					label
+						input(type='radio', name='choice_id', id='choice_id_'+ choice.id, value=choice.id)
+						p=choice.choice
+			p
+				.col-md-4.text-center
+				button.btn.btn-primary.btn-lg(type='submit', role='button') Submit
+			input(type='hidden', name='question_id', id='question_id', value=question.id)
+			input(type='hidden', name='guest_id', id='guest_id', value=guest.id)
 

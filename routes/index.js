@@ -195,6 +195,19 @@ router.post('/questions/:id', function(req, res, next) {
 			});
 		});
 });
+
+//Delete a question on the questions page
+router.get('/questions/:id/delete', function(req, res, next) {
+	models.Question.destroy({
+		where: {
+			id: req.params.id
+		}
+	})
+	.then(function(question) {
+		res.redirect('/questions');
+	});
+});
+
 //Update response text in edit question
 router.post('/questions/:id/choices/:choiceId', checkAuth, function(req, res, next) {
 	models.Choice.findById(req.params.choiceId)

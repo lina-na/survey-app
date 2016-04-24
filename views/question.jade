@@ -4,12 +4,19 @@ block content
 	div.content
 		.row
 			.col-md-6
-				h2.lead Edit Question #{question.id}
+				h2.lead Edit Question
 				form(method='post', action='/questions/'+ question.id)
 					.form-group
-						textarea.input-lg(name='question', id='question', class='form-control', rows='2', required)=question.question
+						textarea.input-lg(name='question', id='question', class='form-control', rows='3', required)=question.question
 					button.btn.btn-primary.btn-block Save
-					a.btn.btn-link.btn-block(href='/questions') Cancel	
+					a.btn.btn-link.btn-block(href='/questions') Cancel
+				h2.lead Add a Choice	
+				form(method='post', action= question.id+'/choices/add')
+					.input-group
+						input.form-control(type='text', name='choice', placeholder='Enter a choice', required)
+						span.input-group-btn
+							button.btn.btn-success(type='submit')
+								i.glyphicon.glyphicon-check
 			.col-md-6
 				h2.lead Edit Choices
 				ul.list-group 
@@ -25,12 +32,9 @@ block content
 									.col-xs-3
 										a.btn.btn-danger.btn-block(href='/questions/' + question.id + '/choices/' + choice.id + '/delete')
 											i.glyphicon.glyphicon-trash
+		.row
+			.col-md-6
+				p
+					br
+					a.button.btn.btn-primary(href='/questions/') Back to questions
 
-		h2.lead Add a Choice
-		.col-md-4
-			form(method='post', action= question.id+'/choices/add')
-				.input-group
-					input.form-control(type='text', name='choice', placeholder='Enter a choice', required)
-					span.input-group-btn
-						button.btn.btn-success(type='submit')
-							i.glyphicon.glyphicon-check
